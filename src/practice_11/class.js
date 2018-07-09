@@ -7,8 +7,11 @@ class Class{
         return "Class "+this.number;
     }
     assignLeader(student){
-        if(student.klass.equal(this))
+        if(student.klass.equal(this)){
             this.leader = student;
+            if(this.listenAssignLeaderTeacher!==undefined)
+            this.listenAssignLeaderTeacher.DoAssignLeaderListener(student);
+        } 
         else
         console.log('It is not one of us.');
     }
@@ -17,6 +20,16 @@ class Class{
     }
     appendMember(student){
         student.klass = this;
+        if(this.listenJoinTeacher!==undefined)
+        this.listenJoinTeacher.DoJoinListener(student);
     }
+    registerAssignLeaderListener(teacher){
+        this.listenAssignLeaderTeacher = teacher;;
+    }
+    
+    registerJoinListener(teacher){
+        this.listenJoinTeacher = teacher;
+    }
+    
 }
 module.exports = Class;
